@@ -111,14 +111,8 @@ void Switches::update()
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 bool Switches::save(Serializer& out) const
 {
-  try
   {
     out.putByte(mySwitches);
-  }
-  catch(...)
-  {
-    cerr << "ERROR: Switches::save() exception\n";
-    return false;
   }
   return true;
 }
@@ -126,14 +120,8 @@ bool Switches::save(Serializer& out) const
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 bool Switches::load(Serializer& in)
 {
-  try
   {
     mySwitches = in.getByte();
-  }
-  catch(...)
-  {
-    cerr << "ERROR: Switches::load() exception\n";
-    return false;
   }
   return true;
 }

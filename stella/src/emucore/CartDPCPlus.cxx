@@ -209,19 +209,7 @@ inline void CartridgeDPCPlus::callFunction(uInt8 value)
     case 254:
     case 255:
       // Call user written ARM code (most likely be C compiled for ARM)
-      try {
         myThumbEmulator->run();
-      }
-      catch(const string& error) {
-        if(!mySystem->autodetectMode())
-        {
-      #ifdef DEBUGGER_SUPPORT
-          Debugger::debugger().startWithFatalError(error);
-      #else
-          cout << error << endl;
-      #endif
-        }
-      }
       break;
   #endif
     // reserved

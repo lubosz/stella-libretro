@@ -72,7 +72,6 @@ bool StateManager::loadState(Serializer& in)
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 bool StateManager::saveState(Serializer& out)
 {
-  try
   {
     if(&myOSystem->console())
     {
@@ -91,10 +90,6 @@ bool StateManager::saveState(Serializer& out)
           return true;
       }
     }
-  }
-  catch(...)
-  {
-    cerr << "ERROR: StateManager::saveState(Serializer&)" << endl;
   }
   return false;
 }

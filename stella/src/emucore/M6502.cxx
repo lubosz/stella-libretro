@@ -335,7 +335,6 @@ bool M6502::save(Serializer& out) const
 {
   const string& CPU = name();
 
-  try
   {
     out.putString(CPU);
 
@@ -368,11 +367,6 @@ bool M6502::save(Serializer& out) const
     out.putInt(myLastSrcAddressX);
     out.putInt(myLastSrcAddressY);
   }
-  catch(...)
-  {
-    cerr << "ERROR: M6502::save" << endl;
-    return false;
-  }
 
   return true;
 }
@@ -382,7 +376,6 @@ bool M6502::load(Serializer& in)
 {
   const string& CPU = name();
 
-  try
   {
     if(in.getString() != CPU)
       return false;
@@ -415,11 +408,6 @@ bool M6502::load(Serializer& in)
     myLastSrcAddressA = in.getInt();
     myLastSrcAddressX = in.getInt();
     myLastSrcAddressY = in.getInt();
-  }
-  catch(...)
-  {
-    cerr << "ERROR: M6502::laod" << endl;
-    return false;
   }
 
   return true;

@@ -270,7 +270,6 @@ bool TIA::save(Serializer& out) const
 {
   const string& device = name();
 
-  try
   {
     out.putString(device);
 
@@ -359,11 +358,6 @@ bool TIA::save(Serializer& out) const
     // Save the sound sample stuff ...
     mySound.save(out);
   }
-  catch(...)
-  {
-    cerr << "ERROR: TIA::save" << endl;
-    return false;
-  }
 
   return true;
 }
@@ -373,7 +367,6 @@ bool TIA::load(Serializer& in)
 {
   const string& device = name();
 
-  try
   {
     if(in.getString() != device)
       return false;
@@ -468,11 +461,6 @@ bool TIA::load(Serializer& in)
     toggleFixedColors(0);
     myAllowHMOVEBlanks = true;
   }
-  catch(...)
-  {
-    cerr << "ERROR: TIA::load" << endl;
-    return false;
-  }
 
   return true;
 }
@@ -480,16 +468,10 @@ bool TIA::load(Serializer& in)
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 bool TIA::saveDisplay(Serializer& out) const
 {
-  try
   {
     out.putBool(myPartialFrameFlag);
     out.putInt(myFramePointerClocks);
     out.putByteArray(myCurrentFrameBuffer, 160*320);
-  }
-  catch(...)
-  {
-    cerr << "ERROR: TIA::saveDisplay" << endl;
-    return false;
   }
 
   return true;
@@ -498,7 +480,6 @@ bool TIA::saveDisplay(Serializer& out) const
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 bool TIA::loadDisplay(Serializer& in)
 {
-  try
   {
     myPartialFrameFlag = in.getBool();
     myFramePointerClocks = in.getInt();
@@ -513,11 +494,6 @@ bool TIA::loadDisplay(Serializer& in)
     // as it existed when the state was saved
     if(myPartialFrameFlag)
       myFramePointer += myFramePointerClocks;
-  }
-  catch(...)
-  {
-    cerr << "ERROR: TIA::loadDisplay" << endl;
-    return false;
   }
 
   return true;

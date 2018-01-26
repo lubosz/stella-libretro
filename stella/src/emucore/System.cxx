@@ -307,7 +307,6 @@ void System::unlockDataBus()
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 bool System::save(Serializer& out) const
 {
-  try
   {
     out.putString(name());
     out.putInt(myCycles);
@@ -321,11 +320,6 @@ bool System::save(Serializer& out) const
       if(!myDevices[i]->save(out))
         return false;
   }
-  catch(...)
-  {
-    cerr << "ERROR: System::save" << endl;
-    return false;
-  }
 
   return true;
 }
@@ -333,7 +327,6 @@ bool System::save(Serializer& out) const
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 bool System::load(Serializer& in)
 {
-  try
   {
     if(in.getString() != name())
       return false;
@@ -349,11 +342,6 @@ bool System::load(Serializer& in)
     for(uInt32 i = 0; i < myNumberOfDevices; ++i)
       if(!myDevices[i]->load(in))
         return false;
-  }
-  catch(...)
-  {
-    cerr << "ERROR: System::load" << endl;
-    return false;
   }
 
   return true;

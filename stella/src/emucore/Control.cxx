@@ -129,7 +129,6 @@ void Controller::set(AnalogPin pin, Int32 value)
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 bool Controller::save(Serializer& out) const
 {
-  try
   {
     // Output the digital pins
     out.putBool(myDigitalPinState[One]);
@@ -142,18 +141,12 @@ bool Controller::save(Serializer& out) const
     out.putInt(myAnalogPinValue[Five]);
     out.putInt(myAnalogPinValue[Nine]);
   }
-  catch(...)
-  {
-    cerr << "ERROR: Controller::save() exception\n";
-    return false;
-  }
   return true;
 }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 bool Controller::load(Serializer& in)
 {
-  try
   {
     // Input the digital pins
     myDigitalPinState[One]   = in.getBool();
@@ -165,11 +158,6 @@ bool Controller::load(Serializer& in)
     // Input the analog pins
     myAnalogPinValue[Five] = (Int32) in.getInt();
     myAnalogPinValue[Nine] = (Int32) in.getInt();
-  }
-  catch(...)
-  {
-    cerr << "ERROR: Controller::load() exception\n";
-    return false;
   }
   return true;
 }

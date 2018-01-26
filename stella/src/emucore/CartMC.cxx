@@ -247,7 +247,6 @@ const uInt8* CartridgeMC::getImage(int& size) const
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 bool CartridgeMC::save(Serializer& out) const
 {
-  try
   {
     out.putString(name());
 
@@ -257,11 +256,6 @@ bool CartridgeMC::save(Serializer& out) const
     // The 32K of RAM
     out.putByteArray(myRAM, 32 * 1024);
   }
-  catch(...)
-  {
-    cerr << "ERROR: CartridgeMC::save" << endl;
-    return false;
-  }
 
   return true;
 }
@@ -269,7 +263,6 @@ bool CartridgeMC::save(Serializer& out) const
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 bool CartridgeMC::load(Serializer& in)
 {
-  try
   {
     if(in.getString() != name())
       return false;
@@ -279,11 +272,6 @@ bool CartridgeMC::load(Serializer& in)
 
     // The 32K of RAM
     in.getByteArray(myRAM, 32 * 1024);
-  }
-  catch(...)
-  {
-    cerr << "ERROR: CartridgeMC::load" << endl;
-    return false;
   }
 
   return true;

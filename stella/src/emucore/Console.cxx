@@ -186,7 +186,6 @@ Console::~Console()
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 bool Console::save(Serializer& out) const
 {
-  try
   {
     // First save state for the system
     if(!mySystem->save(out))
@@ -197,11 +196,6 @@ bool Console::save(Serializer& out) const
          mySwitches->save(out)))
       return false;
   }
-  catch(...)
-  {
-    cerr << "ERROR: Console::save" << endl;
-    return false;
-  }
 
   return true;  // success
 }
@@ -209,7 +203,6 @@ bool Console::save(Serializer& out) const
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 bool Console::load(Serializer& in)
 {
-  try
   {
     // First load state for the system
     if(!mySystem->load(in))
@@ -219,11 +212,6 @@ bool Console::load(Serializer& in)
     if(!(myControllers[0]->load(in) && myControllers[1]->load(in) &&
          mySwitches->load(in)))
       return false;
-  }
-  catch(...)
-  {
-    cerr << "ERROR: Console::load" << endl;
-    return false;
   }
 
   return true;  // success
